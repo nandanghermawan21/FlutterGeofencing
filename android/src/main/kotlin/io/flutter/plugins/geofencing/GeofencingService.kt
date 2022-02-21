@@ -105,6 +105,8 @@ class GeofencingService : MethodCallHandler, JobIntentService() {
                 }
             }
             "GeofencingService.promoteToForeground" -> {
+                Log.d("GeofenceService", "GeofenceService invoke => GeofencingService.promoteToForeground")
+                Log.d("GeofenceService", "GeofenceService context =>"+mContext.toString())
                 mContext.startForegroundService(Intent(mContext, IsolateHolderService::class.java))
             }
             "GeofencingService.demoteToBackground" -> {

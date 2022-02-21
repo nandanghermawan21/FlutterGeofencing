@@ -20,9 +20,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String geofenceState = 'N/A';
   List<String> registeredGeofences = [];
-  double latitude = -7.03626; //-7.036168, 107.976975
-  double longitude = 107.97688;
-  double radius = 1.0;
+  double latitude = -7.0398141; //-7.036168, 107.976975 //-7.0398141,107.9733688
+  double longitude = 107.9733688; //-7.2279, 107.9087 37.4219918, -122.0839986
+  double radius = 100;
   ReceivePort port = ReceivePort();
   final List<GeofenceEvent> triggers = <GeofenceEvent>[
     GeofenceEvent.enter,
@@ -56,6 +56,10 @@ class _MyAppState extends State<MyApp> {
     final SendPort send =
         IsolateNameServer.lookupPortByName('geofencing_send_port');
     send?.send(e.toString());
+    if (e == GeofenceEvent.enter) {
+      print("promote app to foreground");
+      GeofencingManager.promoteToForeground();
+    }
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
